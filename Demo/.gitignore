@@ -1,0 +1,13 @@
+node_modules
+*.pyc
+*.serverless
+*.DS_Store
+*.terraform*
+*.tfstate*
+*output*
+.env
+.pytest_cache
+/data
+package-lock.json
+venv
+.env.local
