@@ -10,15 +10,12 @@ jobs:
   setup:
     name: Setup Environment
     runs-on: ubuntu-latest
-    outputs:
-      aws_credentials_step: ${{ steps.aws-credentials.outputs }}
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Setup AWS credentials
-      id: aws-credentials
       run: |
         mkdir -p ~/.aws
         echo "[Personal]" > ~/.aws/credentials
@@ -31,9 +28,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -55,7 +49,7 @@ jobs:
       run: terraform apply -auto-approve
       working-directory: ./Demo/terraform/stages/dev
 
-  serverless:
+  deploy_serverless:
     name: Deploy Serverless Dev
     needs: setup
     runs-on: ubuntu-latest
