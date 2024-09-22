@@ -1,29 +1,38 @@
-name: Demo Terraform Deployment
+name: Demo Deploy Infrastructure Dev
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - '*'
 
 jobs:
-  terraform:
-    name: Deploy Terraform Dev
+  setup:
+    name: Setup Environment
     runs-on: ubuntu-latest
-
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: 'eu-north-1'
-      AWS_PROFILE: Personal
+    outputs:
+      aws_credentials_step: ${{ steps.aws-credentials.outputs }}
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Setup AWS credentials
+      id: aws-credentials
       run: |
         mkdir -p ~/.aws
         echo "[Personal]" > ~/.aws/credentials
         echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
         echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+
+  terraform:
+    name: Deploy Terraform Dev
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -32,16 +41,34 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: ./terraform/stages/dev
+      working-directory: ./Demo/terraform/stages/dev
 
     - name: Terraform Validate
       run: terraform validate
-      working-directory: ./terraform/stages/dev
+      working-directory: ./Demo/terraform/stages/dev
 
     - name: Terraform Plan
       run: terraform plan
-      working-directory: ./terraform/stages/dev
+      working-directory: ./Demo/terraform/stages/dev
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
-      working-directory: ./terraform/stages/dev
+      working-directory: ./Demo/terraform/stages/dev
+
+  serverless:
+    name: Deploy Serverless Dev
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install Serverless CLI
+      run: npm install -g serverless
+
+    - name: Deploy Serverless Application
+      run: serverless deploy --stage dev
+      working-directory: ./Demo/api
