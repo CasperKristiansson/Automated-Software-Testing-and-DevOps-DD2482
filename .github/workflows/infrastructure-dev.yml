@@ -15,18 +15,10 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: 'eu-north-1'
-      AWS_PROFILE: Personal
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
-    - name: Setup AWS credentials
-      run: |
-        mkdir -p ~/.aws
-        echo "[Personal]" > ~/.aws/credentials
-        echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-        echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1

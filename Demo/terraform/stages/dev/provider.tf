@@ -12,11 +12,9 @@ terraform {
     region         = "eu-north-1"
     dynamodb_table = "kth-devops-course-terraform-state-lock-dev"
     encrypt        = true
-    profile        = "Personal"
   }
 }
 
 provider "aws" {
   region  = "eu-north-1"
-  profile = "Personal"
 }
