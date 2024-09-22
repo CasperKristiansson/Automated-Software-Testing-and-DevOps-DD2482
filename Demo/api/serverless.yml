@@ -1,76 +1,44 @@
-service: demo-service
+service: kth-devops-api-service
+
+frameworkVersion: '3'
+
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: python3.11
+  region: eu-north-1
+  stage: dev
+  profile: Personal
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:*"
+          Resource: "*"
 
-name: Demo Deploy Infrastructure Dev
+package:
+  individually: true
+  patterns:
+    - '!**'
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - '*'
-
-jobs:
-  terraform:
-    name: Deploy Terraform Dev
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: 'eu-north-1'
-
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: '1.9.5'
-
-    - name: Terraform Init
-      run: terraform init
-      working-directory: ./Demo/terraform/stages/dev
-
-    - name: Terraform Validate
-      run: terraform validate
-      working-directory: ./Demo/terraform/stages/dev
-
-    - name: Terraform Plan
-      run: terraform plan
-      working-directory: ./Demo/terraform/stages/dev
-
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-      working-directory: ./Demo/terraform/stages/dev
-
-  serverless:
-    name: Deploy Serverless Dev
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: 'eu-north-1'
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-
-    - name: Install Serverless CLI
-      run: npm install -g serverless@3
-
-    - name: Deploy Serverless Application
-      run: serverless deploy --stage dev
-      working-directory: ./Demo/api
+functions:
+  getUser:
+    handler: get_user/get_user.lambda_handler
+    events:
+      - http:
+          method: POST
+          path: /user/get_user
+          cors: true
+    package:
+      patterns:
+        - get_user/**
+  addUser:
+    handler: add_user/add_user.lambda_handler
+    events:
+      - http:
+          method: POST
+          path: /user/add_user
+          cors: true
+    package:
+      patterns:
+        - add_user/**
