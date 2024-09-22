@@ -35,19 +35,19 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: Demo/terraform/stages/dev
+      working-directory: ${{ github.workspace }}/Demo/terraform/stages/dev
 
     - name: Terraform Validate
       run: terraform validate
-      working-directory: Demo/terraform/stages/dev
+      working-directory: ${{ github.workspace }}/Demo/terraform/stages/dev
 
     - name: Terraform Plan
       run: terraform plan
-      working-directory: Demo/terraform/stages/dev
+      working-directory: ${{ github.workspace }}/Demo/terraform/stages/dev
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
-      working-directory: Demo/terraform/stages/dev
+      working-directory: ${{ github.workspace }}/Demo/terraform/stages/dev
 
   deploy_serverless:
     name: Deploy Serverless Dev
@@ -65,4 +65,4 @@ jobs:
 
     - name: Deploy Serverless Application
       run: serverless deploy --stage dev
-      working-directory: Demo/api
+      working-directory: ${{ github.workspace }}/Demo/api
