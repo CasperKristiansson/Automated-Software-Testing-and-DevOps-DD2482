@@ -7,9 +7,15 @@ on:
       - '*'
 
 jobs:
-  setup:
-    name: Setup Environment
+  terraform:
+    name: Deploy Terraform Dev
     runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: 'eu-north-1'
+      AWS_PROFILE: Personal
 
     steps:
     - name: Checkout code
@@ -21,15 +27,6 @@ jobs:
         echo "[Personal]" > ~/.aws/credentials
         echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
         echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
-
-  terraform:
-    name: Deploy Terraform Dev
-    needs: setup
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -52,14 +49,26 @@ jobs:
       run: terraform apply -auto-approve
       working-directory: ./Demo/terraform/stages/dev
 
-  deploy_serverless:
+  serverless:
     name: Deploy Serverless Dev
-    needs: setup
     runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: 'eu-north-1'
+      AWS_PROFILE: Personal
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Setup AWS credentials
+      run: |
+        mkdir -p ~/.aws
+        echo "[Personal]" > ~/.aws/credentials
+        echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
+        echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -67,7 +76,7 @@ jobs:
         node-version: '20'
 
     - name: Install Serverless CLI
-      run: npm install -g serverless
+      run: npm install -g serverless@3
 
     - name: Deploy Serverless Application
       run: serverless deploy --stage dev
