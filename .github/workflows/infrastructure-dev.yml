@@ -2,6 +2,9 @@ name: Deploy Terraform Configuration Dev
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - '*'
 
 jobs:
   terraform:
