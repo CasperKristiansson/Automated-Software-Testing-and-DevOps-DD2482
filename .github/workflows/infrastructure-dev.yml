@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
     - name: Setup AWS credentials
       run: |
         mkdir -p ~/.aws
@@ -28,6 +25,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -35,19 +35,19 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: ${{ github.workspace }}/Demo/terraform/stages/dev
+      working-directory: ./Demo/terraform/stages/dev
 
     - name: Terraform Validate
       run: terraform validate
-      working-directory: ${{ github.workspace }}/Demo/terraform/stages/dev
+      working-directory: ./Demo/terraform/stages/dev
 
     - name: Terraform Plan
       run: terraform plan
-      working-directory: ${{ github.workspace }}/Demo/terraform/stages/dev
+      working-directory: ./Demo/terraform/stages/dev
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
-      working-directory: ${{ github.workspace }}/Demo/terraform/stages/dev
+      working-directory: ./Demo/terraform/stages/dev
 
   deploy_serverless:
     name: Deploy Serverless Dev
@@ -55,6 +55,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
@@ -65,4 +68,4 @@ jobs:
 
     - name: Deploy Serverless Application
       run: serverless deploy --stage dev
-      working-directory: ${{ github.workspace }}/Demo/api
+      working-directory: ./Demo/api
