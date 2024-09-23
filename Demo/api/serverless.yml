@@ -40,7 +40,8 @@ functions:
               - Cache-Control
               - Pragma
               - Expires
-          cacheKeyParameters: []
+          caching:
+            enabled: false
     package:
       patterns:
         - get_user/**
@@ -62,7 +63,8 @@ functions:
               - Cache-Control
               - Pragma
               - Expires
-        cacheKeyParameters: []
+        caching:
+          enabled: false
     package:
       patterns:
         - add_user/**
