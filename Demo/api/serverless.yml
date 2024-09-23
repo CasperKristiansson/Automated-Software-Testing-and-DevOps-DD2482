@@ -28,7 +28,15 @@ functions:
       - http:
           method: POST
           path: /user/get_user
-          cors: true
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
     package:
       patterns:
         - get_user/**
@@ -38,7 +46,15 @@ functions:
       - http:
           method: POST
           path: /user/add_user
-          cors: true
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
     package:
       patterns:
         - add_user/**
