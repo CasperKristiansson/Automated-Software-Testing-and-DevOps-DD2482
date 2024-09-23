@@ -1,3 +1,4 @@
+import json
 import boto3
 from boto3.dynamodb.types import TypeDeserializer
 
@@ -28,7 +29,7 @@ def lambda_handler(event, context):
         if 'Item' not in response:
             return {
                 'statusCode': 404,
-                'body': 'Item not found',
+                'body': json.dumps('Item not found'),
                 'headers': {
                     'Access-Control-Allow-Origin': '*',
                     'Access-Control-Allow-Headers': 'Content-Type',
@@ -37,7 +38,7 @@ def lambda_handler(event, context):
 
         return {
             'statusCode': 200,
-            'body': {k: deserializer.deserialize(v) for k, v in response['Item'].items()},
+            'body': json.dumps({k: deserializer.deserialize(v) for k, v in response['Item'].items()}),
             'headers': {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Content-Type',
@@ -47,7 +48,7 @@ def lambda_handler(event, context):
     except Exception as e:
         return {
             'statusCode': 500,
-            'body': str(e),
+            'body': json.dumps(f'Error getting item: {str(e)}'),
             'headers': {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Content-Type',

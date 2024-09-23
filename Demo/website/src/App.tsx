@@ -9,6 +9,9 @@ function App() {
     try {
       const res = await fetch(endpoint, {
         method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
 
       const body = await res.json();
