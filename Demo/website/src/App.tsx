@@ -30,6 +30,21 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <button
+          style={{
+            position: 'absolute',
+            top: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            padding: '10px 20px',
+            fontSize: '16px',
+            cursor: 'pointer',
+          }}
+          onClick={() => handleRequest('https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/user/add_user')}
+        >
+          Insert User
+        </button>
+
         <div>
           <textarea
             value={`Status Code: ${statusCode}\n\nResponse Body:\n${response}`}
@@ -38,14 +53,19 @@ function App() {
             cols={50}
           />
         </div>
+
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '20px' }}>
           <div>
-            <p style={{ marginBottom: "2px" }}>/user/get_user</p>
-            <button onClick={() => handleRequest('https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/user/get_user')}>Send Request</button>
+            <p style={{ marginBottom: '2px' }}>/user/get_user</p>
+            <button onClick={() => handleRequest('https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/user/get_user')}>
+              Send Request
+            </button>
           </div>
           <div>
-            <p style={{ marginBottom: "2px" }}>/get_user</p>
-            <button onClick={() => handleRequest('https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/get_user')}>Send Request</button>
+            <p style={{ marginBottom: '2px' }}>/get_user</p>
+            <button onClick={() => handleRequest('https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/get_user')}>
+              Send Request
+            </button>
           </div>
         </div>
       </header>
