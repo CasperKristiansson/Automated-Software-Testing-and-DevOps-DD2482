@@ -13,7 +13,8 @@ def lambda_handler(event, context):
             'headers': {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type'
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Max-Age': '3600'
             }
         }
 
@@ -33,6 +34,9 @@ def lambda_handler(event, context):
                 'headers': {
                     'Access-Control-Allow-Origin': '*',
                     'Access-Control-Allow-Headers': 'Content-Type',
+                    'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+                    'Expires': '0',
+                    'Pragma': 'no-cache',
                 },
             }
 
@@ -42,6 +46,9 @@ def lambda_handler(event, context):
             'headers': {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Content-Type',
+                'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+                'Expires': '0',
+                'Pragma': 'no-cache',
             },
         }
 
@@ -52,5 +59,8 @@ def lambda_handler(event, context):
             'headers': {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Content-Type',
+                'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+                'Expires': '0',
+                'Pragma': 'no-cache',
             },
         }
