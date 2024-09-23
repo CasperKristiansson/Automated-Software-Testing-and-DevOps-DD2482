@@ -8,7 +8,7 @@ function App() {
   const handleRequest = async (endpoint: string) => {
     try {
       const res = await fetch(endpoint, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",

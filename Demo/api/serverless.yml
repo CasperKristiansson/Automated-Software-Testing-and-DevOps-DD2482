@@ -26,7 +26,7 @@ functions:
     handler: get_user/get_user.lambda_handler
     events:
       - http:
-          method: GET
+          method: POST
           path: /get_user
           cors:
             origin: '*'
@@ -48,7 +48,7 @@ functions:
     handler: add_user/add_user.lambda_handler
     events:
       - http:
-          method: GET
+          method: POST
           path: /user/add_user
           cors:
             origin: '*'
