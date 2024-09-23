@@ -16,6 +16,14 @@ provider:
             - "dynamodb:*"
           Resource: "*"
 
+plugins:
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true
+    number: 1
+
 package:
   individually: true
   patterns:
