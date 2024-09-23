@@ -37,6 +37,9 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
               - X-Amz-User-Agent
+              - Cache-Control
+              - Pragma
+              - Expires
           cacheKeyParameters: []
     package:
       patterns:
@@ -56,6 +59,9 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
               - X-Amz-User-Agent
+              - Cache-Control
+              - Pragma
+              - Expires
         cacheKeyParameters: []
     package:
       patterns:

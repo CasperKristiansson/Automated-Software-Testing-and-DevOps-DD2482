@@ -11,6 +11,9 @@ function App() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+          "Expires": "0",
+          "Pragma": "no-cache",
         },
       });
 
