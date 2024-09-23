@@ -10,8 +10,9 @@ function App() {
       const res = await fetch(endpoint, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+        },
       });
 
       const body = await res.json();
