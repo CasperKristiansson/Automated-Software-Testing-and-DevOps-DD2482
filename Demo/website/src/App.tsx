@@ -38,11 +38,11 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '20px' }}>
           <div>
             <p style={{ marginBottom: "2px" }}>/user/get_user</p>
-            <button onClick={() => handleRequest('/user/get_user')}>Send Request</button>
+            <button onClick={() => handleRequest('https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/user/get_user')}>Send Request</button>
           </div>
           <div>
-            <p style={{ marginBottom: "2px" }}>/users/get_user</p>
-            <button onClick={() => handleRequest('/users/get_user')}>Send Request</button>
+            <p style={{ marginBottom: "2px" }}>/get_user</p>
+            <button onClick={() => handleRequest('https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/get_user')}>Send Request</button>
           </div>
         </div>
       </header>
