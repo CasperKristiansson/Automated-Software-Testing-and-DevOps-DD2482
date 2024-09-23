@@ -34,8 +34,8 @@ functions:
     handler: get_user/get_user.lambda_handler
     events:
       - http:
-          method: GET
-          path: /user/get_user
+          method: POST
+          path: get_user
           cors:
             origin: '*'
             headers:
@@ -48,8 +48,6 @@ functions:
               - Cache-Control
               - Pragma
               - Expires
-          caching:
-            enabled: false
     package:
       patterns:
         - get_user/**
@@ -71,8 +69,6 @@ functions:
               - Cache-Control
               - Pragma
               - Expires
-        caching:
-          enabled: false
     package:
       patterns:
         - add_user/**
