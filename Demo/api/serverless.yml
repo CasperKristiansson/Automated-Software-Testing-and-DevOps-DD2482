@@ -34,8 +34,8 @@ functions:
     handler: get_user/get_user.lambda_handler
     events:
       - http:
-          method: POST
-          path: get_user
+          method: GET
+          path: user/get_user
           cors:
             origin: '*'
             headers:
@@ -51,12 +51,12 @@ functions:
     package:
       patterns:
         - get_user/**
-  userGetUser:
-    handler: get_user/get_user.lambda_handler
+  getWeather:
+    handler: get_weather/get_weather.lambda_handler
     events:
       - http:
-          method: POST
-          path: user/get_user
+          method: GET
+          path: weather/get_weather
           cors:
             origin: '*'
             headers:
@@ -76,7 +76,7 @@ functions:
     handler: add_user/add_user.lambda_handler
     events:
       - http:
-          method: POST
+          method: GET
           path: /user/add_user
           cors:
             origin: '*'
