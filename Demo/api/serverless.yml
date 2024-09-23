@@ -27,7 +27,7 @@ functions:
     events:
       - http:
           method: POST
-          path: /user/get_user
+          path: /get_user
           cors:
             origin: '*'
             headers:
