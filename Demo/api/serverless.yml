@@ -71,7 +71,7 @@ functions:
               - Expires
     package:
       patterns:
-        - get_user/**
+        - get_weather/**
   addUser:
     handler: add_user/add_user.lambda_handler
     events:
