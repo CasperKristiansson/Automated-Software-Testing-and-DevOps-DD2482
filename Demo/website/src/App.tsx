@@ -22,12 +22,16 @@ function App() {
       setStatusCode(res.status);
       setResponse(JSON.stringify(body, null, 2));
     } catch (error) {
+      setStatusCode(500);
       if (error instanceof Error) {
-        setResponse(`Error: ${error.message}`);
+        if (error.message === 'Failed to fetch') {
+          setResponse('Failed to fetch. Endpoint might not be reachable');
+        } else {
+          setResponse(`Error: ${error.message}`);
+        }
       } else {
         setResponse('An unknown error occurred');
       }
-      setStatusCode('Error');
     }
   };
 
