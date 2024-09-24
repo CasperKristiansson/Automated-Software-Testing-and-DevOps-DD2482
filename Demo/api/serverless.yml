@@ -56,7 +56,7 @@ functions:
     events:
       - http:
           method: GET
-          path: weather/get_weather
+          path: /weather/get_weather
           cors:
             origin: '*'
             headers:

@@ -61,13 +61,13 @@ function App() {
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '20px' }}>
           <div>
             <p style={{ marginBottom: '2px' }}>/user/get_user</p>
-            <button onClick={() => handleRequest(`https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/user/get_user?t=${new Date().getTime()}`)}>
+            <button onClick={() => handleRequest(`https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/user/get_user?`)}>
               Send Request
             </button>
           </div>
           <div>
-            <p style={{ marginBottom: '2px' }}>/get_user</p>
-            <button onClick={() => handleRequest(`https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/get_user?t=${new Date().getTime()}`)}>
+            <p style={{ marginBottom: '2px' }}>/weather/get_weather</p>
+            <button onClick={() => handleRequest(`https://o2i85wdpe0.execute-api.eu-north-1.amazonaws.com/dev/weather/get_weather`)}>
               Send Request
             </button>
           </div>
