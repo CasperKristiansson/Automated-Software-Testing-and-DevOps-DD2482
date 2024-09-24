@@ -51,27 +51,27 @@ functions:
     package:
       patterns:
         - get_user/**
-  getWeather:
-    handler: get_weather/get_weather.lambda_handler
-    events:
-      - http:
-          method: GET
-          path: /weather/get_weather
-          cors:
-            origin: '*'
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-              - Cache-Control
-              - Pragma
-              - Expires
-    package:
-      patterns:
-        - get_weather/**
+  # getWeather:
+  #   handler: get_weather/get_weather.lambda_handler
+  #   events:
+  #     - http:
+  #         method: GET
+  #         path: /weather/get_weather
+  #         cors:
+  #           origin: '*'
+  #           headers:
+  #             - Content-Type
+  #             - X-Amz-Date
+  #             - Authorization
+  #             - X-Api-Key
+  #             - X-Amz-Security-Token
+  #             - X-Amz-User-Agent
+  #             - Cache-Control
+  #             - Pragma
+  #             - Expires
+  #   package:
+  #     patterns:
+  #       - get_weather/**
   addUser:
     handler: add_user/add_user.lambda_handler
     events:
