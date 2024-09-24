@@ -76,7 +76,7 @@ jobs:
           node-version: '20'
       
       - name: Install Serverless framework
-        run: npm install -g serverless
+        run: npm install -g serverless@3
 
       - name: Deploy Serverless Application
         run: npx serverless deploy --stage dev
