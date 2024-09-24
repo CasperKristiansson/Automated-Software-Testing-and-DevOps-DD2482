@@ -74,6 +74,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+      
+      - name: Install Serverless framework
+        run: npm install -g serverless
 
       - name: Deploy Serverless Application
         run: npx serverless deploy --stage dev
